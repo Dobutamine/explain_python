@@ -7,7 +7,7 @@ class BloodCompartment:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('blood compartment initialized')
+    print('blood compartment {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

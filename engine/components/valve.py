@@ -7,7 +7,7 @@ class Valve:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('valve initialized')
+    print('valve {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

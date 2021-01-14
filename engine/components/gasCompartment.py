@@ -7,7 +7,7 @@ class GasCompartment:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('gas compartment initialized')
+    print('gas compartment {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

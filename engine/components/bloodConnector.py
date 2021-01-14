@@ -7,7 +7,7 @@ class BloodConnector:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('blood connector initialized')
+    print('blood connector {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

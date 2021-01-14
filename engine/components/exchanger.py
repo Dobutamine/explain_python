@@ -7,7 +7,7 @@ class Exchanger:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('exchanger initialized')
+    print('exchanger {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

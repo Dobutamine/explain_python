@@ -7,7 +7,7 @@ class Diffusor:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('diffusor initialized')
+    print('diffusor {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

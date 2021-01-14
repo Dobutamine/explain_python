@@ -7,7 +7,7 @@ class Container:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('container initialized')
+    print('container {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

@@ -7,7 +7,7 @@ class GasConnector:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('gas connector initialized')
+    print('gas connector {} initialized'.format(self.name))
 
   def model_step(self):
     if (self.is_enabled):

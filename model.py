@@ -8,16 +8,16 @@ class Model:
     # instantiate a new model engine
     self.engine = model_engine.Engine()
 
-    # load the JSON model definition file
+    # declare an object holding the parsed JSON definition file and load the JSON model definition file
     self.definition = self.loadModelDefinition(model_definition_file)
 
-    # inject model definition into the model engine instance
+    # inject parsed model definition into the model engine instance
     self.engine.inject_modeldefinition(self.definition)
 
-    # declare an object holding the model data
+    # declare an object holding the data coming back from the model engine
     self.data = []
 
-    # declare an object holding the mode properties
+    # declare an object holding the model properties coming from the model engine
     self.properties = {}
 
   def setDataloggerInterval(new_interval):
