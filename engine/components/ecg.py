@@ -1,7 +1,12 @@
-class Ecg:
+class ECG:
 
-  def __init__(self):
-    self.is_enabled = False
+  def __init__(self, **args):
+    super().__init__()
+
+    # set the attributes
+    for key, value in args.items():
+      setattr(self, key, value)
+
     print('ecg initialized')
 
   def model_step(self):
