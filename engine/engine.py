@@ -4,6 +4,8 @@ from engine.components import bloodCompartment, bloodConnector, valve, gasCompar
 from engine.components import ecg, heart, ans, breathing, lungs, kidneys, metabolism, brain, adaption, birth, cvvh, \
     drugs, ecmo, liver, placenta, uterus, ventilator
 
+from time import perf_counter
+import math
 
 class Engine:
 
@@ -139,17 +141,23 @@ class Engine:
 
         # print status messages
         print('calculating')
-        print('model clock at {}',format(self.current_model['model_time_total']))
+        print('model clock at {} sec'.format(self.current_model['model_time_total']))
         print('calculating {} sec. in {} steps.'.format(time_to_calculate, no_steps))
+
+        # start the performance counter
+        t1_start = perf_counter()
 
         # execute the model steps
         for step in range(no_steps):
             self.model_step()
 
+        # stop the performance counter
+        t1_stop = perf_counter()
+
         # print status messages
-        print('ready in .. sec.')
-        print('average model step in .. ms')
-        print('model clock at {}',format(self.current_model['model_time_total']))
+        print('ready in {} sec.'.format(t1_stop - t1_start))
+        print('average model step in {} ms'.format(((t1_stop - t1_start) / no_steps) * 1000))
+        print('model clock at {} sec'.format(int(self.current_model['model_time_total'])))
 
     def fast_forward_model(self, to_time):
         # calculate the number of steps needed
@@ -159,16 +167,23 @@ class Engine:
         # print status messages
         print('fast forwarding to {} sec. in {} steps'.format(to_time, no_steps))
 
+        # start the performance counter
+        t1_start = perf_counter()
+
         # execute the model steps
         for step in range(no_steps):
             self.model_step()
 
+        # stop the performance counter
+        t1_stop = perf_counter()
+
         # print status messages
-        print('ready in .. sec.')
+        print('ready in {} sec.'.format(t1_stop - t1_start))
 
     def model_step(self):
         # increase the model clock
         self.current_model['model_time_total'] += self.current_model['modeling_stepsize']
+
         # do a model step in all model components
-        for key, value in self.current_model['components'].items():
-            self.current_model['components'][key].model_step(self.current_model)
+        for key, model in self.current_model['components'].items():
+            model.model_step(self.current_model)

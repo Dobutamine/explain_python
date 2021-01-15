@@ -1,5 +1,4 @@
-class BloodConnector:
-
+class BaseModel:
     def __init__(self, **args):
         # initialize the super class
         super().__init__()

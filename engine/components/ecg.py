@@ -5,8 +5,6 @@ class ECG:
     def __init__(self, **args):
         super().__init__()
 
-
-
         # state properties (accessible from outside)
         self.heart_rate = 0
         self.pq_time = 0
@@ -52,6 +50,7 @@ class ECG:
 
 
     def updateECG(self):
+        self.heart_rate = 60.0
         # calculate the correct qt time
         self.cqt_time = self.qtc() - self.qrs_time
 
@@ -144,7 +143,7 @@ class ECG:
             self._t_wave_signal_counter = 0
 
         # if nothing is running, so there's no electrical activity then reset the ecg signal
-        if self._qt_running == False & self._qrs_running == False & self._qt_running == False:
+        if self._qt_running == False and self._qrs_running == False and self._qt_running == False:
             self.ecg_signal = 0
 
         # calculate the measured heart_rate based on the ventricular rate every 5 seconds
@@ -158,9 +157,9 @@ class ECG:
     def qtc(self):
         # calculate the heart rate correct qt time
         if self.heart_rate > 10:
-            return self._model['components']['ecg'].pq_time * math.sqrt(60.0 / self.heart_rate)
+            return self._model['components']['ecg'].qt_time * math.sqrt(60.0 / self.heart_rate)
         else:
-            return self._model['components']['ecg'].pq_time * math.sqrt(60.0 / 10.0)
+            return self._model['components']['ecg'].qt_time * math.sqrt(60.0 / 10.0)
 
     def buildDynamicPWave(self):
         pass

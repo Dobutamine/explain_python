@@ -68,5 +68,5 @@ if __name__ == '__main__':
 
     new_model = Model('normal_neonate.json')
 
-    new_model.fastForwardModel(10)
+    new_model.calculateModel(10)
 
