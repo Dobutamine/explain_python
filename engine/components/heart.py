@@ -51,10 +51,10 @@ class Heart:
     self._model['components']['ecg'].ncc_ventricular += 1
 
     # transfer the activation function to the heart compartments
-    # self._model['components']['RA'].el_act = self.aaf
-    # self._model['components']['RV'].el_act = self.vaf
-    # self._model['components']['LA'].el_act = self.aaf
-    # self._model['components']['LV'].el_act = self.vaf
+    self._model['components']['RA'].el_act = self.aaf
+    self._model['components']['RV'].el_act = self.vaf
+    self._model['components']['LA'].el_act = self.aaf
+    self._model['components']['LV'].el_act = self.vaf
 
 
 

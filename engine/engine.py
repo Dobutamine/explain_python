@@ -32,9 +32,6 @@ class Engine:
         # signal that the engine class is initalized
         print('engine instantiated')
 
-    def load_model(self, json_model_definition):
-        pass
-
     def inject_modeldefinition(self, model_definition):
 
         # declare components object holding all the model components
@@ -133,7 +130,6 @@ class Engine:
 
         # initialize the ventilator model
         self.current_model['components']['ventilator'] = ventilator.Ventilator(**model_definition['ventilator'])
-
 
     def calculate_model(self, time_to_calculate):
         # calculate the number of steps needed
