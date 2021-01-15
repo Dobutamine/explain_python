@@ -50,7 +50,6 @@ class ECG:
 
 
     def updateECG(self):
-        self.heart_rate = 60.0
         # calculate the correct qt time
         self.cqt_time = self.qtc() - self.qrs_time
 

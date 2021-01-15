@@ -146,6 +146,7 @@ class Engine:
         # execute the model steps
         for step in range(no_steps):
             self.model_step()
+            # print(self.current_model['components']['AA'].pres)
 
         # stop the performance counter
         t1_stop = perf_counter()
