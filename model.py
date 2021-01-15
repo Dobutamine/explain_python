@@ -3,6 +3,7 @@ from engine import engine as model_engine
 
 
 class Model:
+
     def __init__(self, model_definition_file):
         super().__init__()
 
@@ -42,11 +43,11 @@ class Model:
     def getProperties(model):
         pass
 
-    def fastForwardModel(time_to_calculate):
-        pass
+    def fastForwardModel(self, to_time):
+        self.engine.fast_forward_model((to_time))
 
-    def calculateModel(time_to_calculate):
-        pass
+    def calculateModel(self, time_to_calculate):
+        self.engine.calculate_model(time_to_calculate)
 
     def clearData(self):
         pass
@@ -61,9 +62,11 @@ class Model:
 
 
 if __name__ == '__main__':
+    print('')
     print('Radboudumc Lumped Varying Elastance Model python version 0.1')
     print('')
 
     new_model = Model('normal_neonate.json')
-    for i in range(10000):
-        new_model.engine.current_model['components']['ecg'].model_step(new_model.engine.current_model)
+
+    new_model.fastForwardModel(10)
+

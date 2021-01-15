@@ -7,9 +7,7 @@ class Brain:
     for key, value in args.items():
       setattr(self, key, value)
 
-    print('brain initialized')
-
-  def model_step(self):
+  def model_step(self, current_model):
     if (self.is_enabled):
       self.model_cycle()
 

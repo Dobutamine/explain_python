@@ -39,8 +39,6 @@ class ECG:
         for key, value in args.items():
             setattr(self, key, value)
 
-        print('ecg model initialized')
-
     def model_step(self, current_model):
         # only update the model if it is enabled
         if self.is_enabled:
@@ -157,7 +155,6 @@ class ECG:
         # increase the time counter for measured heart_rate routine
         self._measured_hr_time_counter += self._model['modeling_stepsize']
 
-        print(self._sa_node_counter)
     def qtc(self):
         # calculate the heart rate correct qt time
         if self.heart_rate > 10:

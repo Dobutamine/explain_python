@@ -10,7 +10,10 @@ class Engine:
     def __init__(self):
 
         # define an object holding the entire model state and properties
-        self.current_model = {}
+        self.current_model = {
+            'model_time_total': 0,
+            'components': {}
+        }
 
         # define an object holding the model definition as defined by the json definition file
         self.model_definition = {}
@@ -33,8 +36,6 @@ class Engine:
     def inject_modeldefinition(self, model_definition):
 
         # declare components object holding all the model components
-        self.current_model['components'] = {}
-
         self.current_model['name']= model_definition['name']
         self.current_model['description'] = model_definition['description']
         self.current_model['weight'] = model_definition['weight']
@@ -131,14 +132,43 @@ class Engine:
         # initialize the ventilator model
         self.current_model['components']['ventilator'] = ventilator.Ventilator(**model_definition['ventilator'])
 
-        # for key, value in self.current_model['components'].items():
-        #   print(key, '->', self.current_model['components'][key].name)
 
     def calculate_model(self, time_to_calculate):
-        pass
+        # calculate the number of steps needed
+        no_steps = int(time_to_calculate /  self.current_model['modeling_stepsize'])
 
-    def fast_forward_model(self, time_to_calculate):
-        pass
+        # print status messages
+        print('calculating')
+        print('model clock at {}',format(self.current_model['model_time_total']))
+        print('calculating {} sec. in {} steps.'.format(time_to_calculate, no_steps))
+
+        # execute the model steps
+        for step in range(no_steps):
+            self.model_step()
+
+        # print status messages
+        print('ready in .. sec.')
+        print('average model step in .. ms')
+        print('model clock at {}',format(self.current_model['model_time_total']))
+
+    def fast_forward_model(self, to_time):
+        # calculate the number of steps needed
+        time_to_calculate = to_time - self.current_model['model_time_total']
+        no_steps = int(time_to_calculate / self.current_model['modeling_stepsize'])
+
+        # print status messages
+        print('fast forwarding to {} sec. in {} steps'.format(to_time, no_steps))
+
+        # execute the model steps
+        for step in range(no_steps):
+            self.model_step()
+
+        # print status messages
+        print('ready in .. sec.')
 
     def model_step(self):
-        pass
+        # increase the model clock
+        self.current_model['model_time_total'] += self.current_model['modeling_stepsize']
+        # do a model step in all model components
+        for key, value in self.current_model['components'].items():
+            self.current_model['components'][key].model_step(self.current_model)
