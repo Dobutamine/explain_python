@@ -1,68 +1,69 @@
 import json
 from engine import engine as model_engine
 
+
 class Model:
-  def __init__(self, model_definition_file):
-    super().__init__()
-    
-    # instantiate a new model engine
-    self.engine = model_engine.Engine()
+    def __init__(self, model_definition_file):
+        super().__init__()
 
-    # declare an object holding the parsed JSON definition file and load the JSON model definition file
-    self.definition = self.loadModelDefinition(model_definition_file)
+        # instantiate a new model engine
+        self.engine = model_engine.Engine()
 
-    # inject parsed model definition into the model engine instance
-    self.engine.inject_modeldefinition(self.definition)
+        # declare an object holding the parsed JSON definition file and load the JSON model definition file
+        self.definition = self.loadModelDefinition(model_definition_file)
 
-    # declare an object holding the data coming back from the model engine
-    self.data = []
+        # inject parsed model definition into the model engine instance
+        self.engine.inject_modeldefinition(self.definition)
 
-    # declare an object holding the model properties coming from the model engine
-    self.properties = {}
+        # declare an object holding the data coming back from the model engine
+        self.data = []
 
-  def setDataloggerInterval(new_interval):
-    pass
+        # declare an object holding the model properties coming from the model engine
+        self.properties = {}
 
-  def setDataloggerWatchedModels(models_to_watch):
-    pass
+    def setDataloggerInterval(new_interval):
+        pass
 
-  def setModelState(snapshot):
-    pass
+    def setDataloggerWatchedModels(models_to_watch):
+        pass
 
-  def setProperty(model, property, new_value, in_time=0, at_time=0, mode="abs"):
-    pass
+    def setModelState(snapshot):
+        pass
 
-  def getModelState():
-    pass
+    def setProperty(model, property, new_value, in_time=0, at_time=0, mode="abs"):
+        pass
 
-  def getModelDefinition():
-    pass
+    def getModelState(self):
+        pass
 
-  def getProperties(model):
-    pass
+    def getModelDefinition(self):
+        pass
 
-  def fastForwardModel(time_to_calculate):
-    pass
+    def getProperties(model):
+        pass
 
-  def calculateModel(time_to_calculate):
-    pass
+    def fastForwardModel(time_to_calculate):
+        pass
 
-  def clearData():
-    pass
+    def calculateModel(time_to_calculate):
+        pass
 
-  def receiveMessageFromModel(message):
-    pass
+    def clearData(self):
+        pass
 
-  def loadModelDefinition(self, filename):
-    with open('normal_neonate.json') as f:
-        loaded_model = json.load(f)
-    return loaded_model
+    def receiveMessageFromModel(message):
+        pass
 
+    def loadModelDefinition(self, filename):
+        with open('normal_neonate.json') as f:
+            loaded_model = json.load(f)
+        return loaded_model
 
 
 if __name__ == '__main__':
-  print('Radboudumc Lumped Varying Elastance Model python version 0.1')
-  print('')
-  
-  new_model = Model('normal_neonate.json')
-  
+    print('Radboudumc Lumped Varying Elastance Model python version 0.1')
+    print('')
+
+    new_model = Model('normal_neonate.json')
+    for i in range(10000):
+        new_model.engine.current_model['components']['ecg'].model_step(new_model.engine.current_model)

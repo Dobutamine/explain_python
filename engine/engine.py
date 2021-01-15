@@ -35,6 +35,11 @@ class Engine:
         # declare components object holding all the model components
         self.current_model['components'] = {}
 
+        self.current_model['name']= model_definition['name']
+        self.current_model['description'] = model_definition['description']
+        self.current_model['weight'] = model_definition['weight']
+        self.current_model['modeling_stepsize'] = model_definition['modeling_stepsize']
+
         # initialize all the blood compartments
         _class = getattr(bloodCompartment, "BloodCompartment")
         for definition in model_definition['blood_compartment_definitions']:
